@@ -1,0 +1,48 @@
+<head>
+  <%= stylesheet_link_tag 'user', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body class="text-center">
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column align-items-center">
+    <%=form_for @user, :html => {class:"form-signin"} do |f|%>
+      <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+      <h1 class="h3 mb-3 font-weight-normal">S'inscrire</h1>
+      <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="firstName">Prénom</label>
+            <%= f.text_field :first_name, class: "form-control", id: "firstName", placeholder:"Prénom"%>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="lastName">Nom</label>
+            <%= f.text_field :last_name, class: "form-control", id: "lastName", placeholder:"Nom"%>
+          </div>
+        </div>
+      <label for="inputEmail" class="sr-only">Adresse e-mail</label>
+      <%= f.email_field :email, class: "form-control", id: "inputEmail", placeholder:"Adresse e-mail"%>
+      <label for="inputPassword" class="sr-only">Mot de passe</label>
+      <%= f.password_field :password, class: "form-control", id: "inputPassword", placeholder:"Mot de passe"%>
+      <div class="row">
+        <div class="col-md-12">
+          <%= f.password_field :password_confirmation, class: "form-control", id: "confirmPassword", placeholder:"Confirmation Mot de passe"%>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="inputAge">Âge</label>
+          <%= f.text_field :age, class: "form-control", id: "age", placeholder:"Âge"%>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="inputCity">Ville</label>
+          <%= f.select :city, options_from_collection_for_select(City.all,"id", "name"), class:'form-control' %>
+        </div>
+      </div>
+       <div class="col-md-12 mb-3">
+      <label for="inputDescription" class="sr-only">Description</label>
+      <%= f.text_area :description, class: "form-control", id: "inputDescription", placeholder:"Description"%>
+      </div>
+      <div class="col-md-12 mb-3">
+      <%=f.submit class:"btn btn-primary btn-lg btn-block", value:"Inscription"%>
+      </div>
+    <%end%>
+  </div>
+</body>

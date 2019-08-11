@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= stylesheet_link_tag 'static_pages', media: 'all', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+<body class="text-center" style="background-image: url('https://images.unsplash.com/photo-1562499332-64827643864f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80');background-position: center center; background-size: cover;">
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column align-items-center">
+
+
+    <main role="main" class="inner cover my-auto">
+      <h1 class="cover-heading">Bienvenue <%= User.find_by(id: session[:user_id]).first_name.capitalize %> !</h1>
+      <p class="lead">Ici c'est notre super site de potins, il est chouette, non ?</p>
+    </main>
+  </div>
+
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= stylesheet_link_tag 'static_pages', media: 'all', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class="text-center" style="background-image: url('https://images.unsplash.com/photo-1432256851563-20155d0b7a39?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80');background-position: center center; background-size: cover;">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column align-items-center">
+      <main role="main" class="inner cover my-auto">
+        <h1 class="jumbotron-heading text-dark">Home</h1>
+        <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+        <p class="lead">
+          <%if logged_in?%>
+          <%=link_to "Créer un potin", new_gossip_path, :class => "btn btn-primary my-2"%>
+          <%end%>  
+          <%=link_to "Voir les potins", gossips_path, :class => "btn btn-secondary my-2"%>
+        </p>
+      </main>
+    </div>
+
+
+  </body>
+</html>

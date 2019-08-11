@@ -1,0 +1,63 @@
+<main role="main">
+  <section class="jumbotron text-center" style="background-image: url('https://images.unsplash.com/photo-1530811761207-8d9d22f0a141?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80');background-position: center center; background-size: cover;">
+    <div class="container">
+      <h1 class="jumbotron-heading text-light">Mailbox</h1>
+      <p class="lead text-light">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        <% @conversations.each do |conversation| %>
+          <% if conversation.sender_id == current_user.id ||      conversation.recipient_id == current_user.id %>
+            <% if conversation.sender_id == current_user.id %>
+              <% recipient = User.find(conversation.recipient_id) %>
+            <% else %>
+              <% recipient = User.find(conversation.sender_id) %>
+            <% end %>
+              <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                  <div class="card-body">
+                    <h5 class="card-title">              
+                    <%= link_to "#{recipient.first_name} #{recipient.last_name}",   conversation_messages_path(conversation)%>
+                    </h5>
+                  </div>
+                </div>
+              </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</main>
+
+<main role="main">
+  <section class="jumbotron text-center" style="background-image: url('https://images.unsplash.com/photo-1475483768296-6163e08872a1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');background-position: center center; background-size: cover;">
+    <div class="container">
+      <h1 class="jumbotron-heading text-light">All Users</h1>
+      <p class="lead text-light">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        <% @users.each do |user| %>
+          <% if user.id != current_user.id %>
+            <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                  <h5 class="card-title">              
+                    <%= "#{user.first_name} #{user.last_name}" %> 
+                    <p class="card-text"><%= link_to 'Message me!', conversations_path(sender_id: current_user.id, recipient_id: user.id), method: 'post'%></p>
+                  </h5>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</main>

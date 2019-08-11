@@ -1,0 +1,30 @@
+<main role="main">
+
+  <section class="jumbotron text-center" style="background-image: url('https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=701&q=80');background-position: center center; background-size: cover;">
+    <div class="container">
+      <h1 class="jumbotron-heading text-light">Users</h1>
+      <p class="lead text-light">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        <% @users.each_with_index do |user| %>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">              
+              <%=link_to "#{user.first_name} #{user.last_name}", user_path(user.id)%>
+              </h5>
+              <h6 class="card-subtitle mb-2 text-muted"><%= user.email %></h6>
+              <p class="card-text"><%= user.description %></p>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+</main>

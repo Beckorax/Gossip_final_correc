@@ -1,0 +1,27 @@
+<body class="bg-light">
+    <div class="container">
+  <div class="py-5 text-center">
+    <img class="d-block mx-auto mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+    <h2>Comment form</h2>
+    <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 order-md-1">
+      <%=form_for @comment, url:{action: "update"} do |f|%>
+      <%= f.hidden_field :authenticity_token, value: form_authenticity_token %>
+        <div class="row form-group">
+          <div class="col-md-12 mb-3">
+            <label>Contenue</label>
+            <%= f.text_area :content, class: "form-control" %>
+            <small class="text-muted">Raconte pas de la merde !</small>
+          <span style="opacity: 1; left: 270px; top: 44.5px; width: 19px; min-width: 19px; height: 13px; position: absolute; background-repeat: no-repeat; background-position: 0px 0px; border: none; display: inline; visibility: visible; z-index: auto;"></span></div>
+        </div>
+        <p class="text-center">
+          <input type="submit" class="btn btn-primary btn-lg" value="Valider">
+          <%=link_to "Supprimer", gossip_comment_path(@gossip_id, @comment_id), :class => "btn btn-lg btn-danger",  :data => {:confirm => 'Êtes-vous sûr ?', :method => 'DELETE'}%>
+        </p>
+      <%end%>
+    </div>
+  </div>
+</body>

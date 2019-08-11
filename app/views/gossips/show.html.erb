@@ -1,0 +1,50 @@
+<body class="d-flex flex-column h-100">
+  <div class="container">
+    <main role="main" class="my-auto">
+    <h1 class="mt-5"><%= @gossip.title%></h1>
+    <p class="lead">
+    <%=link_to "#{@gossip.user.first_name} #{@gossip.user.last_name}", user_path(@gossip.user.id), :class => "nav-link"%>
+    </p>
+    <p>Contenue : <%= @gossip.content%><br/></p>
+    <p><%=@likes%> 
+      <%if logged_in? && liked?(@gossip.id)%>
+      <%=link_to "👍", gossip_like_path(@gossip), method: :delete%>
+      <%elsif logged_in? && !liked?(@gossip.id)%>
+      <%=link_to "👍🏻", gossip_likes_path(@gossip), method: :post%>
+      <%else%>
+      <%= link_to "👍🏻", new_session_path%>
+      <%end%>
+    </p>
+    
+    <p>  Créé le <%= @gossip.created_at.strftime("%d/%m/%Y")%></p>
+    <%if logged_user?(@gossip.user)%>
+    <p><%=link_to "Éditer", edit_gossip_path(@index), :class => "btn btn-lg btn-secondary"%>
+    <%=link_to "Supprimer", gossip_path(@index), :class => "btn btn-lg btn-danger",  :data => {:confirm => 'Êtes-vous sûr ?', :method => 'DELETE'}%></p>
+    <%end%>
+    <p>  Tags : <%=@tags_string%></p>
+      Comments : 
+      <% @gossip.comments.map do |i| %>
+      <p>
+        <%=i.content%> - <%=i.user.first_name%> <%=i.user.last_name%> <%if logged_user?(i.user)%>- <%=link_to "Éditer", edit_gossip_comment_path(@gossip.id, i.id)%><%end%>
+        <%@comments.where(commentable_id: i.id, commentable_type: "Comment").map do |j| %>
+      <br/>➡ <%=j.content%> - <%=j.user.first_name%> <%=j.user.last_name%>
+        <% end %>      
+      </p>
+      <% end %>  
+      <div class="col-md-12 order-md-1 my-4">
+      <%if logged_in?%>
+      <h4>Add a comment:</h4>
+      <%= form_with(model: [ @gossip, @gossip.comments.build ], local: true) do |form| %>
+        <p>
+          <%= form.label :content %><br>
+          <%= form.text_area :content, class: "form-control" %>
+        </p>
+        <p>
+          <%= form.submit value: "Valider",  class: "btn btn-primary btn-lg btn-block" %>
+        </p>
+      <% end %>    
+      <%end%>
+    </div>
+    </main>
+  </div>
+</body>

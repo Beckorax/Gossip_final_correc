@@ -1,0 +1,17 @@
+<body class="d-flex flex-column h-100">
+  <div class="container">
+    <main role="main" class="my-auto">
+    <h1 class="mt-5"><%= @user.first_name%> <%= @user.last_name%></h1>
+    <p>Description :<br/>
+    <%= @user.description%>
+    </p>
+    <p>E-mail : <%= @user.email%></p>
+    <p>Âge : <%= @user.age%> ans</p>
+    <%if @user.city.present?%>
+    <p>Ville : <%=link_to "#{@user.city.name} - #{@user.city.zip_code}", city_path(@user.city.id)%></p>
+    <%end%>
+    <p>Crée le <%= @user.created_at.strftime("%d/%m/%Y")%></p>
+    
+    </main>
+  </div>
+</body>

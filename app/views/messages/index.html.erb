@@ -1,0 +1,40 @@
+<% if @over_ten %>
+   <%= link_to 'Show Previous', '?m=all' %>
+<% end %>
+
+<section class="jumbotron text-center" style="background-image: url('https://images.unsplash.com/photo-1505298537670-f32d119be330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80');background-position: center center; background-size: cover;">
+    <div class="container">
+      <h1 class="jumbotron-heading text-light"><%=@sender%> - <%=@recipient%></h1>
+      <p class="lead text-light">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+    </div>
+  </section>
+
+<div class="ui segment py-1 container">
+  <% @messages.each do |message| %>
+    <% if message.content %>
+      <% user = User.find(message.sender_id) %>
+      <div class="item">
+        <div class="content">
+          <div class="header"><strong><%= user.first_name %></strong> <%= message.message_time %></div>
+          <div class="list">
+            <div class="item">
+              <i class="right triangle icon"></i>
+              <%= message.content %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<%= form_for [@conversation, @message], html: {class: "ui reply form py-1 container"} do |f| %>
+  <div class="field">
+    <%= f.text_area :content, class: "form-control" %>
+  </div>
+    <%= f.text_field :sender_id, value: current_user.id, type: "hidden"  %>
+  <div>
+    <%= f.submit "Add Reply", class:"btn btn-primary btn-lg btn-block" %>
+  </div>
+
+<% end %>

@@ -1,0 +1,25 @@
+<head>
+  <%= stylesheet_link_tag 'user', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body class="text-center">
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column align-items-center">
+  <%= form_for "", method: "POST",:url => { :action => :create }, :html => { :class => "form-signin" } do |f|%>
+      <h1 class="h3 mb-3 font-weight-normal">Se connecter</h1>
+      <div class="row">
+        <label for="inputEmail" class="sr-only">Adresse e-mail</label>
+        <%= f.email_field :email, class: "form-control", id: "inputEmail", placeholder:"Adresse e-mail"%>
+        <label for="inputPassword" class="sr-only">Mot de passe</label>
+        <%= f.password_field :password, class: "form-control", id: "inputPassword", placeholder:"Mot de passe"%>
+        <div class="checkbox mb-3">
+        <%= f.label :remember_me, class: "checkbox inline" do %>
+          <%= f.check_box :remember_me %>
+          <span>Se souvenir de moi sur cet ordinateur</span>
+        <% end %>        
+      </div>
+      <div class="col-md-12 mb-3">
+        <%= f.submit 'Login', class:"btn btn-primary btn-lg btn-block"%>
+      </div>
+    <%end%>
+  </div>
+</body>
